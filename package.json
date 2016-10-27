@@ -1,6 +1,6 @@
 {
   "name": "generator-fabricator-starter",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A yeoman generator to start your fabricator toolkit.",
   "main": "app/index.js",
   "files": [
