@@ -1,0 +1,20 @@
+{
+  "dest"     : "./build",
+  "package"  : "./package.json",
+  "docs"     : "./src/docs/**/*.md",
+  "materials": "./src/materials/**/*",
+  "templates": "./src/templates/**/*",
+  "data"     : "./src/data/**/*.{json,yml}",
+  "samples"  : "./src/samples/**/*",
+  "analyze"  : "./src/assets/scripts/**/*",
+  "scripts"  : {
+    "toolkit": "./src/assets/scripts/toolkit.js"
+  },
+  "fonts"    : "./src/assets/fonts/**/*",
+  "icons"    : "./src/assets/icons/**/*",
+  "images"   : "./src/assets/images/**/*",
+  "styles"   : {
+    "toolkit": "./src/assets/styles/**/*"
+  },
+  "toolkitConfig": "./toolkit.json"
+}

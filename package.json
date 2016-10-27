@@ -1,0 +1,36 @@
+{
+  "name": "generator-fabricator-starter",
+  "version": "0.0.0",
+  "description": "A yeoman generator to start your fabricator toolkit.",
+  "main": "app/index.js",
+  "files": [
+    "generators"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "version": "npm test",
+    "postversion": "git push && git push --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dietergeerts/generator-fabricator-starter.git"
+  },
+  "keywords": [
+    "yeoman-generator",
+    "fabricator",
+    "fabricator-builder",
+    "fabricator-starter",
+    "toolkit"
+  ],
+  "author": "Dieter Geerts <dieter@dworks.be>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dietergeerts/generator-fabricator-starter/issues"
+  },
+  "homepage": "https://github.com/dietergeerts/generator-fabricator-starter#readme",
+  "dependencies": {
+    "generator-npm-init": "^1.2.3",
+    "yeoman-generator": "0.24.1",
+    "yosay": "^1.2.1"
+  }
+}
