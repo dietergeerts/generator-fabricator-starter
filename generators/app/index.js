@@ -1,67 +1,64 @@
 'use strict';
 
+var _          = require('lodash');
 var generators = require('yeoman-generator');
 var yosay      = require('yosay');
 
 module.exports = generators.Base.extend({
 
-    initializing: function () {
-        this.composeWith(
-            'npm-init',
-            {
-                options: {
-                    version: "0.0.0",
-                    'skip-main': true,
-                    main: "gulpfile.js",
-                    'skip-test': true,
-                    test: "npm run build",
-                    scripts: {
-                        prestart: "npm install",
-                        start: "gulp --dev",
-                        prebuild: "npm install",
-                        build: "gulp",
-                        test: "npm run build",
-                        version: "npm test",
-                        postversion: "git push && git push --tags"
-                    }
-                }
-            },
-            {
-                local: require.resolve('generator-npm-init/app')
-            });
+    prompting: function () {
+        this.log(yosay('Welcome to the Fabricator Starter generator!'));
+        return this.prompt([{
+            type   : 'input',
+            name   : 'name',
+            message: 'name',
+            default: this.appname
+        }]).then(function (answers) {
+            this.config.set('name', answers.name);
+        }.bind(this));
     },
 
-    prompting: function () {
-        var done = this.async();
-        this.log(yosay('Welcome to the Fabricator Starter generator!'));
-        done();
+    default: function () {
+        this.composeWith('npm-init', {
+            options: {
+                'skip-name': true,
+                name: this.config.get('name'),
+                version: "0.0.0",
+                'skip-main': true,
+                main: "gulpfile.js",
+                'skip-test': true,
+                test: "npm run build",
+                scripts: {
+                    prestart: "npm install",
+                    start: "gulp --dev",
+                    prebuild: "npm install",
+                    build: "gulp",
+                    test: "npm run build",
+                    version: "npm test",
+                    postversion: "git push && git push --tags"
+                }
+            }
+        }, {
+            local: require.resolve('generator-npm-init/app')
+        });
     },
 
     writing: function () {
-        this.fs.copy(
-            this.templatePath('gulpfile.js'),
-            this.destinationPath('gulpfile.js')
-        );
-        this.fs.copy(
-            this.templatePath('fabricator.json'),
-            this.destinationPath('fabricator.json')
-        );
-        this.fs.copy(
-            this.templatePath('toolkit.json'),
-            this.destinationPath('toolkit.json')
-        );
-        this.fs.copy(
-            this.templatePath('src/assets/scripts/toolkit.js'),
-            this.destinationPath('src/assets/scripts/toolkit.js')
-        );
-        this.fs.copy(
-            this.templatePath('src/assets/styles/toolkit.scss'),
-            this.destinationPath('src/assets/styles/toolkit.scss')
-        );
-        this.fs.copy(
-            this.templatePath('src/materials/atoms/01-text/01-typography.hbs'),
-            this.destinationPath('src/materials/atoms/01-text/01-typography.hbs')
-        );
+        _.forEach([
+            'src/assets/scripts/toolkit.js',
+            'src/assets/styles/toolkit.scss',
+            'src/materials/atoms/01-text/01-typography.hbs',
+            '.editorconfig',
+            'fabricator.json',
+            'gulpfile.js',
+            'README.md',
+            'toolkit.json'
+        ], function (template) {
+            this.fs.copyTpl(
+                this.templatePath(template),
+                this.destinationPath(template),
+                this.config.getAll());
+        }.bind(this));
     },
 
     install: function () {
